@@ -12,7 +12,7 @@ pipeline {
 
               stage("upper case"){
                    agent{
-                      label: "Develoment"
+                      label "Develoment"
                    }
                   steps{
                       sh "gcc -o uppercase uppercase.c"
@@ -21,7 +21,7 @@ pipeline {
               }
               stage("reverse in develoment 2"){
                   agent{
-                      label: "Develoment2"
+                      label "Develoment2"
                   }
                   steps{
                       sh "gcc -o reverse reverse.c"
