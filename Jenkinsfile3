@@ -1,1 +1,47 @@
+pipeline {
+  agent none 
 
+  environment{
+      TEXT = "ejemplo"
+  }
+
+  stages{
+      stage("parallel in multiple node"){
+
+          parallel{
+
+              stage("upper case"){
+                   agent{
+                      label: "Develoment"
+                   }
+                  steps{
+                      sh "gcc -o uppercase uppercase.c"
+                      sh "./uppercase ${TEXT}"
+                  }
+              }
+              stage("reverse in develoment 2"){
+                  agent{
+                      label: "Develoment2"
+                  }
+                  steps{
+                      sh "gcc -o reverse reverse.c"
+                      sh "./reverse ${TEXT}"
+                    
+                  }
+              }
+          }
+      }
+  }
+
+  post{
+    always { 
+      echo "cualquiera"
+    }  
+    success{
+        echo "bien"
+    }
+    failure{
+        echo "mal"
+    }
+  }
+}
