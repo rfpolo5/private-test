@@ -5,7 +5,7 @@ pipeline{
     }
 
     stages{
-        stege("build"){
+        stage("build"){
             steps{
 
 
