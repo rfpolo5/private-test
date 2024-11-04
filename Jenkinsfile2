@@ -1,1 +1,51 @@
+pipeline{
+    agent none
 
+    stages{
+        stage("build"){
+            agent{
+              label "java && java"
+            }
+            steps{
+
+
+                echo "building in ${env.NODE_NAME} and executor ${env.EXECUTOR_NUMBER}"
+            }
+        }
+
+        stage("test"){
+            agent{
+              label "test && java"
+            }
+            steps{
+                echo "TESTING in ${env.NODE_NAME} and executor ${env.EXECUTOR_NUMBER}"
+                
+            }
+        }
+
+        stage("deploy"){
+            agent{
+              label "prod && java"
+            }
+            steps{
+                echo "DEPLOY in ${env.NODE_NAME} and executor ${env.EXECUTOR_NUMBER}"
+
+            }
+        }
+    }
+
+    post{
+
+        always{
+        
+            echo "test always"
+        }
+        success{
+            echo "bien "
+        }
+        failure{
+            echo "fail"
+        }
+    }
+
+}
