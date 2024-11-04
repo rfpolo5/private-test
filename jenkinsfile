@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+             
+        stage('Build') {
+            steps {
+                echo 'I am in a private github repository'
+                sh 'echo Building...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo Testing...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploying...'
+            }
+        }
+    }
+}
