@@ -1,25 +1,45 @@
-pipeline {
-    agent any
+pipeline{
+    agent {
+        node { label "Develoment"
+        }
+    }
 
-    stages {
-             
-        stage('Build') {
-            steps {
-                echo 'I am in a private github repository'
-                sh 'echo Building...'
+    stages{
+        stege("build"){
+            steps{
+
+
+                echo "building in ${env.NODE_NAME} and executor ${env.EXECUTOR_NUMBER}"
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'echo Testing...'
+        stage("test"){
+            steps{
+                echo "TESTING in ${env.NODE_NAME} and executor ${env.EXECUTOR_NUMBER}"
+                
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sh 'echo Deploying...'
+        stage("deploy"){
+            steps{
+                echo "DEPLOY in ${env.NODE_NAME} and executor ${env.EXECUTOR_NUMBER}"
+
             }
         }
     }
+
+    post{
+
+        always{
+        
+            echo "test always"
+        }
+        success{
+            echo "bien "
+        }
+        failure{
+            echo "fail"
+        }
+    }
+
 }
